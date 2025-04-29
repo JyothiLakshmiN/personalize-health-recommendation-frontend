@@ -23,7 +23,7 @@ export default function Profile({ token }) {
       try {
         const res = await getProfile(token);
         console.log('res', res);
-        setProfile(res.data); // Assuming API returns { age, weight, height, conditions, allergies }
+        setProfile(res.data.profile); // Assuming API returns { age, weight, height, conditions, allergies }
       } catch (err) {
         console.error("Error fetching profile:", err);
         setError("Failed to load profile. Please try again.");
@@ -49,6 +49,7 @@ export default function Profile({ token }) {
       const res = await createProfile(payload, token);
       console.log("Server response:", res);
       alert('Profile saved!');
+      setError(null);
     } catch (err) {
       console.error("API error:", err);
       alert('Failed to save profile');
